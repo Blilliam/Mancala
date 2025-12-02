@@ -2,7 +2,7 @@ package project;
 
 import java.util.Scanner;
 
-public class main {
+public class Driver {
 
 	public static void main(String[] args) {
 		Mancala game = new Mancala();
