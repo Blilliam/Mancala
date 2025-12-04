@@ -158,6 +158,48 @@ public class Mancala {
 		box1 += this.buckets[lastBox];
 		this.buckets[lastBox] = 0;
 	}
+	public void sweepRemainingStones() {
+	    for (int i = 0; i < 6; i++) {
+	        box1 += buckets[i];     // ADDED
+	        buckets[i] = 0;
+	    }
+
+	    for (int i = 6; i < 12; i++) {
+	        box2 += buckets[i];     // ADDED
+	        buckets[i] = 0;
+	    }
+	}
+	
+	public int getP1Score() { 
+		return box1; 
+	}
+	
+	public int getP2Score() { 
+		return box2;
+	}
+	
+	public String getWinner() {
+	    if (box1 > box2) {
+	    	return "P1";
+	    }
+	    if (box2 > box1) {
+	    	return "P2";
+	    }
+	    return "Tie";
+	}
+	public boolean isGameOver() {
+	    boolean p1Empty = true;
+	    boolean p2Empty = true;
+
+	    for (int i = 0; i < 6; i++)
+	        if (buckets[i] != 0) p1Empty = false;
+
+	    for (int i = 6; i < 12; i++)
+	        if (buckets[i] != 0) p2Empty = false;
+
+	    return p1Empty || p2Empty;
+	}
+
 
 	public int getBox1() {
 		return box1;
