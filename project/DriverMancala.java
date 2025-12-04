@@ -1,7 +1,7 @@
 
 import java.util.Scanner;
 
-public class Driver {
+public class DriverMancala {
 
 	public static void main(String[] args) {
 
