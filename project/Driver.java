@@ -1,4 +1,3 @@
-package project;
 
 import java.util.Scanner;
 
@@ -11,7 +10,7 @@ public class Driver {
 
 		System.out.println("=== MANCALA GAME ===");
 		System.out.println("1. Play manually");
-		System.out.println("2. Run full test suite");
+		System.out.println("2. Run full test");
 		System.out.print("Choose option: ");
 		int choice = input.nextInt();
 
@@ -35,7 +34,7 @@ public class Driver {
 			boolean ok = m.makeMove(move);
 
 			if (!ok) {
-				System.out.println("Invalid move! Try again.");
+				System.out.println("Invalid move. Try again.");
 				continue;
 			}
 
@@ -48,8 +47,8 @@ public class Driver {
 				System.out.println(m);
 				System.out.println("=== GAME OVER ===");
 
-				int p1 = m.getP1Score();
-				int p2 = m.getP2Score();
+				int p1 = m.getBox1();
+				int p2 = m.getBox2();
 
 				System.out.println("Player 1 Score: " + p1);
 				System.out.println("Player 2 Score: " + p2);
@@ -62,23 +61,21 @@ public class Driver {
 		input.close();
 	}
 
-// ===========================
-// TEST SUITE
-// ===========================
+//testing
 	public static void runTests() {
 
 		System.out.println("\n=== Test Cases ===");
-
+		
+		testScoringDistribution();
 		testIllegalMoves();
 		testFreeTurn();
 		testCaptureRule();
 		testGameOverSweep();
-		testScoringDistribution();
 
 		System.out.println("\n=== TESTING COMPLETE ===");
 	}
 
-// ---- Test 1: illegal moves ----
+//Illegal Moves
 	public static void testIllegalMoves() {
 		System.out.println("\n---------- Illegal Moves ----------");
 		Mancala m = new Mancala();
@@ -91,7 +88,7 @@ public class Driver {
 		System.out.println("Move 3: " + m.makeMove(3));
 	}
 
-// ---- Test 2: free turn ----
+// Extra turn
 	public static void testFreeTurn() {
 		System.out.println("\n---------- Free Turn Rule ----------");
 		Mancala m = new Mancala();
@@ -111,7 +108,7 @@ public class Driver {
 		System.out.println("Still P1 turn? " + m.getIsP1());
 	}
 
-// ---- Test 3: capture rule ----
+// opposite capture
 	public static void testCaptureRule() {
 		System.out.println("\n---------- Capture Rule ----------");
 
@@ -132,10 +129,10 @@ public class Driver {
 
 		System.out.println("After:");
 		System.out.println(m);
-		System.out.println("Box1 should have captured 4 stones: " + m.getP1Score());
+		System.out.println("Box1 should have captured 4 stones: " + m.getBox1());
 	}
 
-// ---- Test 4: sweep rule ----
+//sweep
 	public static void testGameOverSweep() {
 		System.out.println("\n---------- End Game Sweep ----------");
 
@@ -148,7 +145,7 @@ public class Driver {
 		// P2 has remaining stones
 		m.getBuckets()[7] = 5;
 
-		// Make any P2 move; game ends, sweep happens
+		// Make any P2 move
 		System.out.println(m);
 		
 		m.setP1(false);
@@ -161,15 +158,15 @@ public class Driver {
 		}
 
 		System.out.println(m);
-		System.out.println("Box2 should have +24 (total 25) stones: " + m.getP2Score());
+		System.out.println("Box2 should have +24 (total 25) stones: " + m.getBox2());
 	}
 
-// ---- Test 5: distribution correctness ----
+//move correctness
 	public static void testScoringDistribution() {
 		System.out.println("\n---------- Distribution ----------");
 
 		Mancala m = new Mancala();
-		m.getBuckets()[5] = 4;
+		m.getBuckets()[5] = 18;
 
 		System.out.println("Before:");
 		System.out.println(m);
